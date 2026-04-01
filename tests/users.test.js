@@ -80,7 +80,7 @@ describe('Users - Create', () => {
     const res = await request(app).post('/api/users').set('Authorization', `Bearer ${adminToken}`).send({
       username: 'newusercreated',
       email: 'newusercreated@example.com',
-      password: 'password123',
+      password: 'Password1@',
       role: 'analyst'
     });
     expect(res.status).toBe(201);
@@ -91,7 +91,7 @@ describe('Users - Create', () => {
     const res = await request(app).post('/api/users').set('Authorization', `Bearer ${adminToken}`).send({
       username: 'badrole',
       email: 'badrole@example.com',
-      password: 'password123',
+      password: 'Password1@',
       role: 'superuser'
     });
     expect(res.status).toBe(400);
@@ -101,7 +101,7 @@ describe('Users - Create', () => {
     const res = await request(app).post('/api/users').set('Authorization', `Bearer ${viewerToken}`).send({
       username: 'test',
       email: 'test@example.com',
-      password: 'password123',
+      password: 'Password1@',
       role: 'viewer'
     });
     expect(res.status).toBe(403);
