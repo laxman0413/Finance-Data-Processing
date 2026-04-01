@@ -4,7 +4,8 @@ const { getDb } = require('../config/database');
 
 function listRecords(req, res) {
   const db = getDb();
-  const { type, category, startDate, endDate, page = 1, limit = 10 } = req.query;
+  const { type, category, startDate, endDate, page = 1 } = req.query;
+  const limit = Math.min(parseInt(req.query.limit) || 20, 100);
 
   let query = 'SELECT * FROM financial_records WHERE is_deleted = 0';
   const params = [];
@@ -16,9 +17,9 @@ function listRecords(req, res) {
 
   query += ' ORDER BY date DESC, created_at DESC';
 
-  const offset = (parseInt(page) - 1) * parseInt(limit);
+  const offset = (parseInt(page) - 1) * limit;
   query += ' LIMIT ? OFFSET ?';
-  params.push(parseInt(limit), offset);
+  params.push(limit, offset);
 
   const records = db.prepare(query).all(...params);
   return res.json({ success: true, data: records });

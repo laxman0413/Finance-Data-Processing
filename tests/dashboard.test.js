@@ -58,6 +58,7 @@ describe('Dashboard - Summary', () => {
     expect(res.body.data).toHaveProperty('totalIncome');
     expect(res.body.data).toHaveProperty('totalExpenses');
     expect(res.body.data).toHaveProperty('netBalance');
+    expect(res.body.data).toHaveProperty('recordCount');
     expect(res.body.data.totalIncome).toBe(8000);
     expect(res.body.data.totalExpenses).toBe(1200);
     expect(res.body.data.netBalance).toBe(6800);
