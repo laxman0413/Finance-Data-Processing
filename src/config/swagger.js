@@ -13,7 +13,7 @@ const options = {
     },
     servers: [
       {
-        url: process.env.NODE_ENV === 'production' ? process.env.API_URL || 'https://api.example.com' : 'http://localhost:3000',
+        url: 'https://laxman0413.github.io/Finance-Data-Processing',
         description: process.env.NODE_ENV === 'production' ? 'Production server' : 'Development server',
       },
     ],
