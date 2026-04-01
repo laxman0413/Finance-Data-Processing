@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
+const swaggerUi = require('swagger-ui-express');
+const specs = require('./src/config/swagger');
 const authRoutes = require('./src/routes/auth');
 const userRoutes = require('./src/routes/users');
 const recordRoutes = require('./src/routes/records');
@@ -26,6 +28,8 @@ const authLimiter = rateLimit({
 
 app.use('/api/auth', authLimiter);
 app.use('/api/', limiter);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
