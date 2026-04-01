@@ -30,7 +30,8 @@ async function register(req, res) {
     db.prepare('INSERT INTO users (id, username, email, password, role) VALUES (?, ?, ?, ?, ?)').run(id, username, email, hashedPassword, 'viewer');
 
     const user = db.prepare('SELECT id, username, email, role, status, created_at FROM users WHERE id = ?').get(id);
-    return res.status(201).json({ success: true, data: user });
+    const token = jwt.sign({ id: user.id, username: user.username, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '24h' });
+    return res.status(201).json({ success: true, data: { token, user } });
   } catch (err) {
     return res.status(500).json({ success: false, message: 'Internal server error' });
   }

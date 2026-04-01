@@ -27,8 +27,9 @@ describe('Auth - Register', () => {
     });
     expect(res.status).toBe(201);
     expect(res.body.success).toBe(true);
-    expect(res.body.data).toHaveProperty('id');
-    expect(res.body.data.role).toBe('viewer');
+    expect(res.body.data).toHaveProperty('token');
+    expect(res.body.data.user).toHaveProperty('id');
+    expect(res.body.data.user.role).toBe('viewer');
   });
 
   it('should fail on duplicate email', async () => {
