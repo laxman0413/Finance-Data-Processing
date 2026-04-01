@@ -23,7 +23,7 @@ describe('Auth - Register', () => {
     const res = await request(app).post('/api/auth/register').send({
       username: 'authtest1',
       email: 'authtest1@example.com',
-      password: 'password123'
+      password: 'Password1@'
     });
     expect(res.status).toBe(201);
     expect(res.body.success).toBe(true);
@@ -35,12 +35,12 @@ describe('Auth - Register', () => {
     await request(app).post('/api/auth/register').send({
       username: 'authtest2',
       email: 'authtest2dup@example.com',
-      password: 'password123'
+      password: 'Password1@'
     });
     const res = await request(app).post('/api/auth/register').send({
       username: 'authtest2b',
       email: 'authtest2dup@example.com',
-      password: 'password123'
+      password: 'Password1@'
     });
     expect(res.status).toBe(400);
     expect(res.body.success).toBe(false);
@@ -50,12 +50,12 @@ describe('Auth - Register', () => {
     await request(app).post('/api/auth/register').send({
       username: 'authtestdup3',
       email: 'authtestdup3a@example.com',
-      password: 'password123'
+      password: 'Password1@'
     });
     const res = await request(app).post('/api/auth/register').send({
       username: 'authtestdup3',
       email: 'authtestdup3b@example.com',
-      password: 'password123'
+      password: 'Password1@'
     });
     expect(res.status).toBe(400);
     expect(res.body.success).toBe(false);
@@ -65,7 +65,7 @@ describe('Auth - Register', () => {
     const res = await request(app).post('/api/auth/register').send({
       username: 'ab',
       email: 'authshort@example.com',
-      password: 'password123'
+      password: 'Password1@'
     });
     expect(res.status).toBe(400);
   });
@@ -74,7 +74,7 @@ describe('Auth - Register', () => {
     const res = await request(app).post('/api/auth/register').send({
       username: 'validuser',
       email: 'notanemail',
-      password: 'password123'
+      password: 'Password1@'
     });
     expect(res.status).toBe(400);
   });
@@ -94,14 +94,14 @@ describe('Auth - Login', () => {
     await request(app).post('/api/auth/register').send({
       username: 'logintest1',
       email: 'logintest1@example.com',
-      password: 'password123'
+      password: 'Password1@'
     });
   });
 
   it('should login with valid credentials', async () => {
     const res = await request(app).post('/api/auth/login').send({
       email: 'logintest1@example.com',
-      password: 'password123'
+      password: 'Password1@'
     });
     expect(res.status).toBe(200);
     expect(res.body.success).toBe(true);
@@ -121,7 +121,7 @@ describe('Auth - Login', () => {
   it('should fail with non-existent user', async () => {
     const res = await request(app).post('/api/auth/login').send({
       email: 'nonexistent@example.com',
-      password: 'password123'
+      password: 'Password1@'
     });
     expect(res.status).toBe(401);
     expect(res.body.success).toBe(false);
@@ -130,7 +130,7 @@ describe('Auth - Login', () => {
   it('should fail with invalid email format', async () => {
     const res = await request(app).post('/api/auth/login').send({
       email: 'notanemail',
-      password: 'password123'
+      password: 'Password1@'
     });
     expect(res.status).toBe(400);
   });

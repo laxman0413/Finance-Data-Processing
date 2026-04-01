@@ -4,6 +4,9 @@ const { v4: uuidv4 } = require('uuid');
 const { validationResult } = require('express-validator');
 const { getDb } = require('../config/database');
 
+if (process.env.NODE_ENV === 'production' && !process.env.JWT_SECRET) {
+  throw new Error('JWT_SECRET environment variable must be set in production');
+}
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-key';
 
 async function register(req, res) {
